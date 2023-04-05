@@ -32,6 +32,8 @@ namespace Recap.Controllers
             return View(user.toUpdateDto());
         }
 
+
+        // User/Update?id=1
         [HttpPost]
         public IActionResult Update(int id, UpdateUserDTO dto)
         {
@@ -74,11 +76,11 @@ namespace Recap.Controllers
         {
             User user = FakeDb.Users.First(u => u.ID == id);
 
-            //if (user is not null)
-            //{
-            //    FakeDb.Users.Remove(user);
-            //    return RedirectToAction("Index");
-            //}
+            if (user is not null)
+            {
+                FakeDb.Users.Remove(user);
+                return RedirectToAction("Index");
+            }
 
             return View("NotFound");
         }

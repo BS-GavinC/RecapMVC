@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Recap.Models;
+using Recap.Models.Context;
+using Recap.Models.DTO;
+using Recap.Models.Mapper;
 
 namespace Recap.Controllers
 {
@@ -30,6 +33,19 @@ namespace Recap.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateUserDTO newUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newUser);
+            }
+
+            FakeDb.Users.Add(newUser.ToUser());
+            return RedirectToAction("Index");
+            
         }
 
         //Affiche une page de confirmation de suppression d'un user sur base de son id

@@ -14,15 +14,22 @@
 
 <p>@Model.Email</p>
 
-<h4>Films favoris</h4>
-<ol>
-    @foreach (string movie in Model.FavoriteMovie)
-    {
-        <li>
-            @movie
-        </li>
-    }
-</ol>
+
+
+@if (Model.FavoriteMovie is not null)
+{
+    <h4>Films favoris</h4>
+    <ol>
+        @foreach (string movie in Model.FavoriteMovie)
+        {
+            <li>
+                @movie
+            </li>
+        }
+    </ol>
+}
+
+
 
 <a asp-controller="User" asp-action="Update" asp-route-id="@Model.ID" >Update</a>
 <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.ID">Delete</a>

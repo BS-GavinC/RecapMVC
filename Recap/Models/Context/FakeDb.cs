@@ -1,4 +1,4 @@
-﻿namespace Recap.Models
+﻿namespace Recap.Models.Context
 {
     public static class FakeDb
     {

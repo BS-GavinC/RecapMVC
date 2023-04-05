@@ -1,3 +1,34 @@
-﻿<a asp-controller="User" asp-action="Index">Retour</a>
+﻿@model CreateUserDTO;
 
-<h1>A venir - Formulaire de creation de user</h1>
+
+<a asp-controller="User" asp-action="Index">Retour</a>
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<form method="post">
+    <label>Prenom</label>
+    <input type="text" asp-for="Firstname" />
+    <span asp-validation-for="Firstname"></span>
+    <br />
+
+    <label>Nom</label>
+    <input type="text" asp-for="Lastname" />
+    <span asp-validation-for="Lastname"></span>
+    <br />
+
+    <label>Email</label>
+    <input type="email" asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+    <br />
+
+    <label>Mot de passe</label>
+    <input type="password" asp-for="Password" />
+    <span asp-validation-for="Password"></span>
+    <br />
+
+    <label>Confirmation de mot de passe</label>
+    <input type="password" asp-for="PasswordConfirmation" />
+    <span asp-validation-for="PasswordConfirmation"></span>
+    <br />
+    <input type="submit" />
+</form>

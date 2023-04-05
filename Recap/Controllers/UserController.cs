@@ -73,7 +73,14 @@ namespace Recap.Controllers
         public IActionResult Delete(int id)
         {
             User user = FakeDb.Users.First(u => u.ID == id);
-            return View(user);
+
+            //if (user is not null)
+            //{
+            //    FakeDb.Users.Remove(user);
+            //    return RedirectToAction("Index");
+            //}
+
+            return View("NotFound");
         }
 
     }

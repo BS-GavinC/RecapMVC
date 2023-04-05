@@ -1,5 +1,24 @@
-﻿@model User;
+﻿@model UpdateUserDTO;
 
 <a asp-controller="User" asp-action="Index">Retour</a>
 
-<h1>Modifier @Model.Firstname @Model.Lastname</h1>
+<div asp-asp-validation-summary="ModelOnly"></div>
+
+<form asp-route-id="@ViewBag.id" method="post">
+    <label>Firstname</label>
+    <input type="text" asp-for="Firstname" />
+    <span asp-validation-for="Firstname"></span>
+    <br />
+
+    <label>Lastname</label>
+    <input type="text" asp-for="Lastname" />
+    <span asp-validation-for="Lastname"></span>
+    <br />
+
+    <label>Email</label>
+    <input type="email" asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+    <br />
+
+    <input type="submit" value="Modifier" />
+</form>

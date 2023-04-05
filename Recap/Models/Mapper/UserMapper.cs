@@ -13,5 +13,10 @@ namespace Recap.Models.Mapper
             return new User(FakeDb.Users.Last().ID + 1, newUser.Firstname, newUser.Lastname, newUser.Email, null, newUser.Password);
         }
 
+        public static UpdateUserDTO toUpdateDto(this User user)
+        {
+            return new UpdateUserDTO(user.Firstname, user.Lastname, user.Email);
+        }
+
     }
 }

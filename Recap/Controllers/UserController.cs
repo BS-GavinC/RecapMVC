@@ -26,7 +26,28 @@ namespace Recap.Controllers
         public IActionResult Update(int id)
         {
             User user = FakeDb.Users.First(u => u.ID == id);
-            return View(user);
+
+            ViewBag.id = id;
+
+            return View(user.toUpdateDto());
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, UpdateUserDTO dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.id = id;
+                return View(dto);
+            }
+
+            User user = FakeDb.Users.First(u => u.ID == id);
+            user.Lastname = dto.Lastname;
+            user.Email = dto.Email;
+            user.Firstname = dto.Firstname;
+
+            return RedirectToAction("Index");
+
         }
 
         //Formulaire de creation d'utilisateur

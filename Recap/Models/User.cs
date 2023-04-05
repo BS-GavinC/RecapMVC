@@ -18,6 +18,8 @@
         public string Email { get; set; }
         public List<string> FavoriteMovie { get; set; }
 
-        
+        public double Money { get; set; }
+
+
     }
 }

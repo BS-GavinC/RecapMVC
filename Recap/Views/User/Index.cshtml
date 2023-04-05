@@ -1,0 +1,28 @@
+﻿@model List<User>;
+
+<h1>Mon bel index</h1>
+
+<a asp-controller="User" asp-action="Create">Ajouter un user</a>
+
+@foreach(User user in Model){
+
+    <p>@user.ID @user.Email
+
+        <a asp-controller="User" asp-action="Read" asp-route-id="@user.ID">Voir</a>
+        <a asp-controller="User" asp-action="Update" asp-route-id="@user.ID">Modifier</a>
+        <a asp-controller="User" asp-action="Delete" asp-route-id="@user.ID">Supprimer</a>
+    </p>
+}
+
+@*
+
+localhost:1234/User/Read/12
+asp-route="12"
+
+localhost:1234/User/Read?id=12
+asp-route-id=12
+
+localhost:1234/User/Read?rantanplan=12
+asp-route-rantanplan=12
+ 
+*@

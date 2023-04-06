@@ -3,29 +3,38 @@ using Recap.Models;
 using Recap.Models.Context;
 using Recap.Models.DTO;
 using Recap.Models.Mapper;
+using Recap.Services.Interfaces;
 
 namespace Recap.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         //Affiche tout mes users
         public IActionResult Index()
         {
-            return View(FakeDb.Users);
+            return View(_userService.Get());
         }
 
         //Affiche un user selectionné sur bas de son id
         //localhost:1234/User/Read/12 || localhost:1234/User/Read?id=12
         public IActionResult Read(int id) 
         {
-            User user = FakeDb.Users.First(u => u.ID == id);
-            return View(user);
+            
+            return View(_userService.GetById(id));
         }
 
         // Afficher le formulaire de modification d'un user sur base de son id
         public IActionResult Update(int id)
         {
-            User user = FakeDb.Users.First(u => u.ID == id);
+            User user = _userService.GetById(id);
 
             ViewBag.id = id;
 
@@ -43,10 +52,7 @@ namespace Recap.Controllers
                 return View(dto);
             }
 
-            User user = FakeDb.Users.First(u => u.ID == id);
-            user.Lastname = dto.Lastname;
-            user.Email = dto.Email;
-            user.Firstname = dto.Firstname;
+            _userService.Update(id, dto);
 
             return RedirectToAction("Index");
 
@@ -66,7 +72,7 @@ namespace Recap.Controllers
                 return View(newUser);
             }
 
-            FakeDb.Users.Add(newUser.ToUser());
+            _userService.Create(newUser);
             return RedirectToAction("Index");
             
         }
@@ -74,11 +80,8 @@ namespace Recap.Controllers
         //Affiche une page de confirmation de suppression d'un user sur base de son id
         public IActionResult Delete(int id)
         {
-            User user = FakeDb.Users.First(u => u.ID == id);
-
-            if (user is not null)
+            if (_userService.Delete(id))
             {
-                FakeDb.Users.Remove(user);
                 return RedirectToAction("Index");
             }
 

@@ -1,10 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Recap.Repository.Interfaces;
+using Recap.Repository.Repositories;
+using Recap.Services.Interfaces;
+using Recap.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddTransient<IUserRepository, FakeDbUserRepository>();
 
 var app = builder.Build();
 

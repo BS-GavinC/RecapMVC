@@ -16,5 +16,6 @@ namespace Recap.Repository.Interfaces
 
         bool Delete(User user);
 
+        User? GetByEmail(string email);
     }
 }

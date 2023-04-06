@@ -39,6 +39,8 @@ namespace Recap.Services.Services
             return _userRepository.GetById(id);
         }
 
+        
+
         public User? Update(int id, UpdateUserDTO user)
         {
             User userToModify = _userRepository.GetById(id);
@@ -46,6 +48,26 @@ namespace Recap.Services.Services
             userToModify.Lastname = user.Lastname;
             userToModify.Email = user.Email;
             return _userRepository.Update(userToModify);
+        }
+
+        public bool PasswordIsValid(int id, string password)
+        {
+            User user = _userRepository.GetById(id);
+            return user.Password == password;
+        }
+
+        public bool UpdatePassword(int id, string newPassword)
+        {
+            User user = _userRepository.GetById(id);
+            user.Password = newPassword;
+            return _userRepository.Update(user) is not null;
+        }
+
+        public bool Connection(string email, string password)
+        {
+            User user = _userRepository.GetByEmail(email);
+
+            return user != null && user.Password == password;
         }
     }
 }

@@ -88,5 +88,65 @@ namespace Recap.Controllers
             return View("NotFound");
         }
 
+        public IActionResult ChangePassword(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(int id, UserChangePasswordDTO changePasswordDTO)
+        {
+            Console.WriteLine(id);
+            if (!_userService.PasswordIsValid(id, changePasswordDTO.ActualPassword))
+            {
+                ModelState.AddModelError("ActualPassword", "Le mot de passe ne correspond pas.");
+                return View();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            if (_userService.UpdatePassword(id, changePasswordDTO.NewPassword))
+            {
+                return RedirectToAction("Read", new {id = id});
+            }
+
+            return View("Error");
+            
+        }
+
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginDTO login)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if(_userService.Connection(login.Email, login.Password))
+            {
+               
+                HttpContext.Session.SetString("Email", login.Email);
+                Console.WriteLine("Is Connected");
+                return RedirectToAction("Index");
+
+            }
+            ModelState.AddModelError("Email", "Email ou mot de passe invalide");
+            return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

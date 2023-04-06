@@ -4,7 +4,7 @@ namespace Recap.Models
 {
     public class User
     {
-        public User(string firstname, string lastname, string email, List<string>? favoriteMovie = null, string password = null)
+        public User(string firstname, string lastname, string email, List<string>? favoriteMovie = null, string password = "Test123=")
         {
 
             ID = FakeDb.cpt;

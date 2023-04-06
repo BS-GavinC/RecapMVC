@@ -16,5 +16,11 @@ namespace Recap.Services.Interfaces
 
         bool Delete(int id);
 
+        bool PasswordIsValid(int id, string password);
+
+        bool UpdatePassword(int id, string newPassword);
+
+        bool Connection(string email, string password);
+
     }
 }

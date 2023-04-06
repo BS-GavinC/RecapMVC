@@ -31,6 +31,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User 🤵</a>
                         </li>
+                        @*
+                        ViewContext.HttpContext.Session.Keys.Count() == 0
+                        *@
+                        @if (string.IsNullOrEmpty(ViewContext.HttpContext.Session.GetString("Email")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Connection</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Deconnection</a>
+                            </li>
+                        }
+
+                        
                         @RenderSection("Patate", required : false)
                     </ul>
                 </div>

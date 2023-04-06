@@ -18,6 +18,7 @@ namespace Recap.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

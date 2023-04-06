@@ -10,7 +10,7 @@ namespace Recap.Models.Mapper
 
         public static User ToUser(this CreateUserDTO newUser)
         {
-            return new User(FakeDb.Users.Last().ID + 1, newUser.Firstname, newUser.Lastname, newUser.Email, null, newUser.Password);
+            return new User(newUser.Firstname, newUser.Lastname, newUser.Email, null, newUser.Password);
         }
 
         public static UpdateUserDTO toUpdateDto(this User user)

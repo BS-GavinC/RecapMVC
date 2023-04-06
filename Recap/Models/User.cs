@@ -1,11 +1,13 @@
-﻿namespace Recap.Models
+﻿using Recap.Models.Context;
+
+namespace Recap.Models
 {
     public class User
     {
-        public User(int iD, string firstname, string lastname, string email, List<string>? favoriteMovie = null, string password = null)
+        public User(string firstname, string lastname, string email, List<string>? favoriteMovie = null, string password = null)
         {
 
-            ID = iD;
+            ID = FakeDb.cpt;
             Firstname = firstname;
             Lastname = lastname;
             Email = email;

@@ -10,7 +10,7 @@ namespace Recap.Repository.Interfaces
 
         IEnumerable<User> Get();
 
-        User GetById(int id);
+        User? GetById(int id);
 
         User? Update(User user);
 

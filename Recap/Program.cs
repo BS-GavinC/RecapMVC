@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Recap.Models.Context;
 using Recap.Repository.Interfaces;
 using Recap.Repository.Repositories;
 using Recap.Services.Interfaces;
@@ -9,15 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromHours(2);
 });
 
-builder.Services.AddSingleton<IUserService, UserService>();
-builder.Services.AddTransient<IUserRepository, FakeDbUserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, EntityUserRepository>();
 
 var app = builder.Build();
 

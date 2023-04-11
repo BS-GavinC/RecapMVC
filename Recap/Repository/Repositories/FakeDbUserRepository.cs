@@ -36,7 +36,7 @@ namespace Recap.Repository.Repositories
             return FakeDb.Users.Find(x => x.Email == email);
         }
 
-        public User GetById(int id)
+        public User? GetById(int id)
         {
             return FakeDb.Users.First(u => u.ID == id);
         }
